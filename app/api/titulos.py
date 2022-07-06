@@ -1,3 +1,4 @@
+from re import T
 from flask import jsonify, request, url_for, abort
 from app import db
 from app.models import Titulo
@@ -17,7 +18,8 @@ def get_titulo(id):
 def get_titulos():
     page = request.args.get('page', 1, type=int)
     per_page = min(request.args.get('per_page', 10, type=int), 100)
-    data = Titulo.to_collection_dict(Titulo.query, page, per_page, 'api.get_titulos')
+    # data = Titulo.to_collection_dict(Titulo.query, page, per_page, 'api.get_titulos')
+    data = Titulo.to_collection_dict(Titulo.query.order_by(Titulo.titulo), page, per_page, 'api.get_titulos')
     return jsonify(data)
 
 

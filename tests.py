@@ -9,7 +9,8 @@ from config import Config
 class TestConfig(Config):
     TESTING = True
     # SQLALCHEMY_DATABASE_URI = 'sqlite://'
-    SQLALCHEMY_DATABASE_URI = 'postgresql+psycopg2://postgres:jaguar1974*@localhost:5432/microblogf2'
+    # SQLALCHEMY_DATABASE_URI = 'postgresql+psycopg2://postgres:jaguar1974*@localhost:5432/microblogf2'
+    SQLALCHEMY_DATABASE_URI = 'mssql+pymssql://SA:Jaguar1974*@localhost:1433/microblogf2'
     ELASTICSEARCH_URL = None
 
 

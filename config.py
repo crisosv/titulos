@@ -12,7 +12,8 @@ class Config(object):
     #    'postgres://', 'postgresql://') or \
     #   'sqlite:///' + os.path.join(basedir, 'app.db')
     
-    SQLALCHEMY_DATABASE_URI = 'postgresql+psycopg2://postgres:jaguar1974@localhost:5432/microblogf2'
+    # SQLALCHEMY_DATABASE_URI = 'postgresql+psycopg2://postgres:jaguar1974@localhost:5432/microblogf2'
+    SQLALCHEMY_DATABASE_URI = 'mssql+pymssql://SA:Jaguar1974*@localhost:1433/microblogf2'
     
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     LOG_TO_STDOUT = os.environ.get('LOG_TO_STDOUT')

@@ -61,6 +61,7 @@ class PaginatedAPIMixin(object):
     @staticmethod
     def to_collection_dict(query, page, per_page, endpoint, **kwargs):
         resources = query.paginate(page, per_page, False)
+        # resources = query.paginate(page, per_page, False)
         data = {
             'items': [item.to_dict() for item in resources.items],
             '_meta': {
@@ -163,7 +164,7 @@ class Role(db.Model):
 
 
 
-class User(UserMixin, PaginatedAPIMixin, db.Model):
+class User(UserMixin, PaginatedAPIMixin, db.Model):    
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(64), index=True, unique=True)
     email = db.Column(db.String(120), index=True, unique=True)
@@ -324,7 +325,7 @@ def load_user(id):
 
 
 
-class Institucion(db.Model):
+class Institucion(PaginatedAPIMixin, db.Model):
     # __tablename__ = 'instituciones'
     id = db.Column(db.Integer(), primary_key=True)
     nombre = db.Column(db.String(255), nullable=False)
@@ -360,6 +361,30 @@ class Institucion(db.Model):
     
     def __init__(self, nombre=""):
         self.nombre = nombre
+        
+    
+    def to_dict(self, include_email=False):
+        data = {
+            'id': self.id,
+            'nombre': self.nombre,
+            'cueanexo': self.cueanexo,
+            'domicilio': self.domicilio,
+            'localidad': self.localidad,
+            # 'follower_count': self.followers.count(),
+            'departamento': self.departamento,
+            'region':self.region,
+            'ambito':self.ambito
+        }
+        return data
+
+    
+    def from_dict(self, data, new_user=False):
+        for field in ['nombre', 'cueanexo']:
+            if field in data:
+                setattr(self, field, data[field])
+        if new_user and 'password' in data:
+            self.set_password(data['password'])
+
         
     def search( self, word ):
         if (word is None):

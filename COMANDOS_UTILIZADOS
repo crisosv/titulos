@@ -3,7 +3,7 @@ pip3 install virtualenv
 source venv/bin/activate
 
 
-export FLASK_APP=flasky.py
+export FLASK_APP=titulo.py
 export FLASK_DEBUG=1
 
 
