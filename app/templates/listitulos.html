@@ -1,0 +1,78 @@
+{% extends "base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% import "_macros.html" as macros %}
+ 
+{% block title %}  List {% endblock %}
+
+{% block app_content %}
+
+<br><br>
+<div class="container" style="background-color: black; border-radius: 0.5em;width:81.5em;display: flex; background: rgba(60, 60, 60,0.7);">
+        <a href="/admin">
+            <h5>
+                <span class=" btn badge rounded-pill bg-light text-dark" style="padding:10px; margin-top: 10px;">
+                    Inicio
+                </span>
+            </h5>
+</div>
+<br><br>
+<br>
+<br>
+<div>
+    <div class="opacity-100">
+        <div class="container bg-light p-2 text-dark" style="width:100%;height:200%; padding:20px; border-radius: 15px;">
+            <table class="table">
+                <thead class="table-dark">
+                  <tr>
+                    <th scope="col">Id</th>
+                    <th scope="col">Titulo</th>
+                    <th scope="col">Orientacion</th>
+                    <th scope="col">Carrera</th>
+                    <th scope="col">Resolucion</th>
+                    <th scope="col">Modalidad</th>
+                    <th scope="col">Institucion</th>
+                  </tr>
+                </thead>
+                <tbody>
+                    {% for titulo in titulos %}
+                        <tr>
+                            <td>{{titulo.id}}</td>
+                            <td>{{titulo.titulo}}</td>
+                            <td>{{titulo.orientacion}}</td>
+                            <td>{{titulo.carrera}}</td>
+                            <td>{{titulo.resolucion}}</td>
+                            <td>{{titulo.modalidad}}</td>
+                            <td>{{titulo.institucion.nombre}}</td>
+                            <td>
+                                <a href="/updatetitulo/{{titulo.id}}">
+                                    <button type="submit" class="btn btn-warning btn-sm rounded-pill">
+                                        Update titulo
+                                    </button>
+                                </a>
+                               
+                            </td>
+                            <td>
+                                <a href="/deletetitulo/{{titulo.id}}">
+                                    <button type="submit" class="btn btn-danger btn-sm rounded-pill">
+                                        Delete titulo
+                                    </button>
+                                </a>
+                                
+                            </td>
+                        </tr>
+                     {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+    {% if pagination %}
+        <div class="pagination">
+            <!-- {{ macros.pagination_widget(pagination, '.index') }} -->
+            {{ macros.pagination_widget(pagination, '.listitulos') }}
+        </div>
+    {% endif %}
+
+{% endblock %}

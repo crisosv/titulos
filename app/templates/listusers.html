@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+ 
+{% block title %} Users List {% endblock %}
+
+{% block app_content %}
+
+    <div class="container" style="background-color: black; border-radius: 0.5em;width:81.5em;display: flex; background: rgba(60, 60, 60,0.7);">
+        <a href="/admin">
+            <h5>
+                <span class="badge rounded-pill bg-light text-dark" style="padding:10px; margin-top: 10px;">
+                    Volver
+                </span>
+            </h5>
+        </a>
+    </div>
+
+    <form class="form-inline my-2 my-lg-0" method="GET">
+        <input class="form-control mr-sm-2"
+            type="search" placeholder="Search" name="q"
+        <button class="btn btn-outline-success my-2 my-sm-0" 
+            type="submit"> Search
+        </button>
+    </form>
+
+
+    <div class="containner opacity-100">
+        <div class="container bg-light p-2 text-dark" style="width:50%;height:200%; padding:20px; border-radius: 15px;">
+            <table class="table">
+                <thead class="table-dark">
+                    <tr>
+                      <th scope="col">User Id</th>
+                      <th scope="col">Email</th>
+                      <th scope="col">Name</th>
+                      <th scope="col">Delete</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for user in users %}
+                        <tr>
+                            <td>{{user.id}}</td>
+                            <td>{{user.email}}</td>
+                            <td>{{user.username}}</td>
+                            <td>
+                                <a href="/deleteuser/{{user.id}}">
+                                    <button type="submit" class="btn btn-danger btn-sm rounded-pill">
+                                        Delete User
+                                    </button>
+                                </a>
+                            
+                            </td>
+                        </tr>
+                     {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+
+{% endblock %}
+
